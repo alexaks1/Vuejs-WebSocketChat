@@ -1,0 +1,308 @@
+/* Обнуление стилей */
+*, *::before, *::after, *::placeholder{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: 0;
+    font-family: Roboto, sans-serif;
+}
+/* Основные стили */
+.auth, .registration, .chats, .admin{
+    background-color: 	#2c2f33;
+    height: 100vh;
+}
+.auth, .registration{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.admin{
+    display: flex;
+    justify-content: center;
+}
+.chats, .admin{
+    color: white;
+}
+.accent-text{
+    font-size: 1rem;
+    color:#8B8B8B;
+}
+/* Подписи к полям для ввода */
+.input-label{
+    font-size: 1rem;
+    color:#8B8B8B;
+    text-transform: uppercase;
+}
+/* Ссылки */
+.link{
+    color: #11c8ff;
+    text-decoration: none;
+}
+.link:hover{
+    text-decoration: underline;
+}
+/* Ограничитель */
+.container{
+    max-width: 600px;
+    min-width: 300px;
+    width: 30%;
+}
+/* Лого */
+.logo{
+    color: white;
+    border: 3px solid white;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 4rem;
+    width: 16rem;
+}
+/* Область с логином и паролем */
+.auth__input-area, .registration__input-area{
+    margin: 5vh 0 8vh 0;
+}
+/* Поля логин и пароль */
+.auth-input{
+    width: 100%;
+    height: 8vh;
+    border-radius: 5px;
+    padding-left: 5px;
+    font-size: 1.5rem;
+    margin-bottom: 1vh;
+    /* background-color: #B9BBBE; */
+}
+.auth-input:focus{
+    outline: none;
+    border: 1px solid #3442DD;
+}
+/* Кнопка для отправки формы */
+.submit-button{
+    background-color: #3442DD;
+    width: 100%;
+    height: 8vh;
+    color: white;
+    border-radius: 5px;
+    font-size: 1.5rem;
+}
+.submit-button:hover{
+    background-color: #1121ca;
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+.auth-error{
+    color: red;
+}
+/* Регистрация  */
+.signup-offer{
+    margin-top: 5px;
+}
+/* ЧАТЫ */
+.chats{
+    display: flex;
+}
+.sidebar{
+    height: 100%;
+}
+.top-bar{
+    height: 12%;
+}
+.left-bar{
+    width: 33%;
+    background-color: #2F3136;
+}
+.right-bar{
+    width: 67%;
+    background-color: #36393F;
+}
+/* ЛЕВАЯ ПАНЕЛЬ */
+
+.sidebar.left-bar .top-bar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.add-chat-btn{
+    background: none;
+    cursor: pointer;
+    height: 40%;
+    position: absolute;
+    left: 3%;
+}
+.add-chat-btn img{
+    height: 100%;   
+}
+.sidebar.left-bar .top-bar h1{
+    font-size: 2rem;
+}
+
+/* Список чатов(слева) */
+.chat-list{
+    width: 100%;
+    height: 88%;
+    margin: 0 auto;
+    list-style-type: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    /*прячем скролл /
+    /* IE and Edge */
+    /* -ms-overflow-style: none; */
+    /* Firefox */  
+    /* scrollbar-width: none;   */
+}
+/* .chat-list::-webkit-scrollbar { 
+    display: none;
+} */
+.chat-list__item{
+    border-top: 1px solid #42454a;
+    cursor: pointer;
+    padding: 10px;
+}
+.chat-list__item:last-child{
+    border-bottom: 1px solid #42454a;
+}
+.chat-list__item:hover{
+    background-color: #34373c;
+}
+/* Информация о чате(в списке слева) */
+.chat-info__first-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.chat-info__title{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.chat-info__last-msg-time{
+    color: #8e9297;
+    font-size: 1rem;
+}
+.chat-info__second-row{
+    color:rgb(214, 213, 213);
+}
+
+/* ПРАВАЯ ПАНЕЛЬ */
+.right-bar .top-bar{
+    background-color: #32353B;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.chosen-chat-info__title{
+    font-size: 1.8rem;
+}
+.chosen-chat-info__number-of-people{
+    font-size: 1rem;
+    color: #8e9297;
+}
+.chosen-chat-info__number-of-people:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.chosen-chat-info{
+    background-color: #32353B;
+    text-align: center;
+}
+.chat-history{
+    height: 80%;
+    padding: 1%;
+    list-style-type: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* прячем скролл */
+    /*
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+    */
+}
+/*
+.chat-history::-webkit-scrollbar { 
+    display: none;
+}
+*/
+.message{
+    margin-bottom: 10px;
+}
+.message:last-child{
+    margin-bottom: 0;
+}
+.message__sender{
+    font-weight: bold;
+}
+.message__time{
+    color: #8e9297;
+}
+.message__text{
+    color:rgb(214, 213, 213);
+}
+.message-form{
+    height: 8%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0 0 30px;
+    align-items: center;
+    border-top: 1px solid #42454a;
+}
+.message-form__textarea{
+    resize: none;
+    overflow: auto;
+    width: 90%;
+    height: 80%;
+    border-radius: 5px;
+    bottom: 1%;
+    padding: 0.5em;
+    font-size: 1.2em;
+}
+.message-form__textarea:focus{
+    outline: none;
+    border: 1px solid #3442DD;  
+}
+.message-form__submit-btn{
+    background: none;
+    cursor: pointer;
+    height: 50%;
+    margin: auto;
+}
+.message-form__submit-btn img{
+    height: 100%;
+}
+
+/* АДМИНКА */
+.admin__container{
+    width: 80%;
+}
+.admin h1{
+    padding:10px;
+    text-align: center;
+}
+.admin__input-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.admin__input-and-label{
+    margin: 0 30px;
+}
+.admin__input-and-label label{
+    margin-right: 5px;
+}
+.chats-users-lists{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 50vh;
+}
+.success-message{
+    color: greenyellow;
+}
+.admin__add-btn{
+    background-color: #3442DD;
+    color: white;
+    border-radius: 5px;
+    height: 2em;
+    width: 70px;
+    margin-right: 10px;
+}
