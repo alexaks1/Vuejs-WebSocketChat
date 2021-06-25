@@ -20,7 +20,6 @@ public class UserFactoryImpl implements UserFactory {
                 )
                 .userDetails(
                         UserDetails.builder()
-                                .address(registerDTO.getDetailsDTO().getAddress())
                                 .firstName(registerDTO.getDetailsDTO().getFirstName())
                                 .lastName(registerDTO.getDetailsDTO().getLastName())
                                 .role(Role.USER)

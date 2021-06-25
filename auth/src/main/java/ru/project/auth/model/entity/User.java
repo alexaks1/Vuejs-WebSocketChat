@@ -22,11 +22,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "created_time", updatable = false)
-    private LocalDateTime created;
-
-    @Column(name = "modified_time")
-    private LocalDateTime modified;
+//    @Column(name = "created_time", updatable = false)
+//    private LocalDateTime created;
+//
+//    @Column(name = "modified_time")
+//    private LocalDateTime modified;
 
     @OneToOne(cascade = CascadeType.ALL)
     private UserDetails userDetails;
@@ -35,23 +35,24 @@ public class User {
     private UserCredentials credentials;
 
 
-    @PrePersist
-    private void onCreate() {
-        this.setCreated(LocalDateTime.now());
-        this.setModified(LocalDateTime.now());
-    }
+//    @PrePersist
+//    private void onCreate() {
+//        this.setCreated(LocalDateTime.now());
+//        this.setModified(LocalDateTime.now());
+//    }
 
-    @PreUpdate
-    private void onUpdate() {
-        this.setModified(LocalDateTime.now());
-    }
+//    @PreUpdate
+//    private void onUpdate() {
+//        this.setModified(LocalDateTime.now());
+//    }
 
     public UserResponseDTO toDTO() {
         return new UserResponseDTO(
                 new DetailsDTO(
+                        userDetails.getId(),
                         userDetails.getFirstName(),
                         userDetails.getLastName(),
-                        userDetails.getAddress(),
+                        //userDetails.getAddress(),
                         userDetails.getRole())
         );
     }

@@ -77,10 +77,13 @@ export default {
         })
         .then((response) => {
           this.status.code = response.status;
-          if (this.status.code === 200){
-            this.$router.push({name : 'chat'});
+          if (this.status.code === 200) {
+            this.$router.push({ name: "chats" });
           }
-          //   console.log(response);
+          // console.log(response);
+          let sessionStorage = window.sessionStorage;
+          sessionStorage.setItem("userId", response.data.detailsDTO.id);
+          sessionStorage.setItem("role", response.data.detailsDTO.role);
         })
         .catch((error) => {
           // console.log(error.response)
@@ -94,25 +97,6 @@ export default {
   },
   computed: {},
   mounted() {
-    //     axios
-    //       .post("http://localhost:8081/auth/sign-in", {
-    //         email: "admin",
-    //         password: "admin",
-    //       })
-    //       .then((response) => console.log(response));
-    //     axios
-    //       .post("http://localhost:8081/auth/sign-up", {
-    //         credentialsDTO: {
-    //           email: "ilon@mail.ru",
-    //           password: "12345",
-    //         },
-    //         detailsDTO: {
-    //           firstName: "Ilon",
-    //           lastName: "Mask",
-    //           address: "sadsad",
-    //         },
-    //       })
-    //       .then((response) => console.log(response));
   },
 };
 </script>

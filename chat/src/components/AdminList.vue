@@ -1,9 +1,11 @@
 <template>
-  <ul>
+  <ul class="admin__list">
     <AdminListItem
+      @selectVariant="selectVariant"
       v-for="(item, index) in items"
       :key="index"
       :user="item"
+      :index="index"
     ></AdminListItem>
   </ul>
 </template>
@@ -15,11 +17,22 @@ export default {
   components: {
     AdminListItem,
   },
+  data(){
+      return{
+          selectedVariant: null,
+      }
+  },
   props: {
     items: {
       type: Array,
     },
   },
+  methods:{
+      selectVariant(index){
+          this.selectedVariant = index;
+          this.$emit("selectVariant",  this.selectedVariant);
+      }
+  }
 };
 </script>
 

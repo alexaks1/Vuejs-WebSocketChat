@@ -12,6 +12,12 @@
   import "./styles.css"
   export default {
   name: 'App',
+  data(){
+    return{
+      userId: 1,
+      isAdmin: true,
+    }
+  }
 }
 </script>
 

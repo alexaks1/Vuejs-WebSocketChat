@@ -19,7 +19,7 @@ public class UserDetails {
 
     private String firstName;
     private String lastName;
-    private String address;
+    //private String address;
 
     @Enumerated(value = EnumType.STRING)
     private Role role;

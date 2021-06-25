@@ -6,8 +6,12 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/',
+    redirect: '/sign-in'
+  },
+  {
     path: '/chats',
-    name: 'chat',
+    name: 'chats',
     component: Chat
   },
   {
@@ -19,7 +23,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "Admin" */ '../components/Admin.vue')
   },
   {
-    path: '/auth/sign-in',
+    path: '/sign-in',
     name: 'auth',
     component: () => import(/* webpackChunkName: "Auth" */ '../components/Auth.vue')
   }

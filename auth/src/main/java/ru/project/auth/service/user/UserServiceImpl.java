@@ -32,8 +32,8 @@ public class UserServiceImpl implements UserService {
     @PostConstruct
     void init() {
         userRepository.saveAndFlush(new User(
-                1, LocalDateTime.now(), LocalDateTime.now(),
-                new UserDetails(1, "admin", "admin", "admin", Role.ADMIN),
+                1,
+                new UserDetails(1, "admin", "admin", Role.ADMIN),
                 new UserCredentials(1, "admin", "admin")
         ));
     }

@@ -1,5 +1,5 @@
 <template>
-  <li>
+  <li class="admin__list-item" @click="onClick">
     {{ user }}
   </li>
 </template>
@@ -11,7 +11,15 @@ export default {
     user: {
       type: Object,
     },
+    index: {
+      type: Number,
+    },
   },
+  methods:{
+      onClick(){
+          this.$emit('selectVariant', this.index);
+      }
+  }
 };
 </script>
 
