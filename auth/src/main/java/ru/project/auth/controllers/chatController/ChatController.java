@@ -30,7 +30,7 @@ public class ChatController {
 
     @SneakyThrows
     @GetMapping("/")
-    public ResponseEntity<List<Chat>> getChats(@RequestBody CredentialsDTO credentialsDTO) {
+    public ResponseEntity<List<Chat>> getChats(@RequestParam CredentialsDTO credentialsDTO) {
         final User user = userService.authenticate(credentialsDTO);
 
         if (user.getUserDetails().getRole().equals(Role.ADMIN)) {
@@ -44,11 +44,10 @@ public class ChatController {
 
     @SneakyThrows
     @PostMapping("/")
-    public ResponseEntity<?> addChat(@RequestBody ChatCreationDTO chatCreationDTO,
-                                     @RequestBody CredentialsDTO credentialsDTO) {
+    public ResponseEntity<?> addChat(@RequestBody ChatCreationDTO chatCreationDTO) {
         log.info("Chat creation: " + chatCreationDTO.getName());
 
-        userService.authenticate(credentialsDTO);
+        userService.authenticate(chatCreationDTO.getCredentialsDTO());
         var chat = chatRepository.saveAndFlush(Chat.builder()
                 .name(chatCreationDTO.getName())
                 .users(List.of())

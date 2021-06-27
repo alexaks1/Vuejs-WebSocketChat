@@ -41,7 +41,7 @@ public class UserController {
 
     @SneakyThrows
     @GetMapping("/users")
-    public ResponseEntity<?> getUsers(@RequestBody CredentialsDTO credentialsDTO) {
+    public ResponseEntity<?> getUsers(@RequestParam CredentialsDTO credentialsDTO) {
         final User user = userService.authenticate(credentialsDTO);
 
         if (!userService.isAdmin(user)) {
