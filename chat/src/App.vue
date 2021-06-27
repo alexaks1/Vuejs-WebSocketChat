@@ -4,20 +4,20 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div> -->
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script>
-  import "./styles.css"
-  export default {
-  name: 'App',
-  data(){
-    return{
+import "./styles.css";
+export default {
+  name: "App",
+  data() {
+    return {
       userId: 1,
       isAdmin: true,
-    }
-  }
-}
+    };
+  },
+};
 </script>
 

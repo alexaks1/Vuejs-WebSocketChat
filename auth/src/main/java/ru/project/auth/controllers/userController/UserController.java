@@ -3,7 +3,7 @@ package ru.project.auth.controllers.userController;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
-import lombok.val;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.project.auth.controllers.userController.dto.CredentialsDTO;
@@ -41,10 +41,11 @@ public class UserController {
 
     @SneakyThrows
     @GetMapping("/users")
-    public ResponseEntity<?> getUsers(@RequestParam Long userId) {
-        val isAdmin = userService.isAdmin(userId);
-        if (isAdmin != null) {
-            return isAdmin;
+    public ResponseEntity<?> getUsers(@RequestBody CredentialsDTO credentialsDTO) {
+        final User user = userService.authenticate(credentialsDTO);
+
+        if (!userService.isAdmin(user)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
         final List<User> userList = userRepository.findAll();

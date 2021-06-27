@@ -10,11 +10,11 @@ ul{
     list-style-type: none;
 }
 /* Основные стили */
-.auth, .registration, .chats, .admin{
+.auth,  .chats, .admin{
     background-color: 	#2c2f33;
     height: 100vh;
 }
-.auth, .registration{
+.auth{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -322,6 +322,9 @@ ul{
 .success-message{
     color: greenyellow;
 }
+.error-message{
+    color: red;
+}
 .admin__add-user-to-chat-btn{
     background-color: #3442DD;
     color: white;
@@ -349,9 +352,13 @@ ul{
 .admin__list-item:hover{
     background-color: grey;
 }
+.list-and-title{
+    width: 40%;
+}
 .admin__list{
     overflow-y: scroll;
     height: 100%;
+    width: 100%;
 }
 .add-to-list{
     text-align: center;
@@ -369,4 +376,31 @@ ul{
 }
 .list-and-title__title h2{
     margin-right: 5px;
+}
+.modal{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    position: fixed;
+    top: 0;
+    left: 0;  
+}
+.modal-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.registration{
+    width: 30%;
+}
+.registration h2{
+    font-size: 3rem;
+    text-align: center;    
+}
+.close-modal{
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    cursor: pointer;
 }

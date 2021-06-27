@@ -82,8 +82,7 @@ export default {
           }
           // console.log(response);
           let sessionStorage = window.sessionStorage;
-          sessionStorage.setItem("userId", response.data.detailsDTO.id);
-          sessionStorage.setItem("role", response.data.detailsDTO.role);
+          sessionStorage.setItem("user", JSON.stringify(response.data.detailsDTO));
         })
         .catch((error) => {
           // console.log(error.response)
@@ -96,8 +95,7 @@ export default {
     },
   },
   computed: {},
-  mounted() {
-  },
+  mounted() {},
 };
 </script>
 

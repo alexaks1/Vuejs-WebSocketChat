@@ -1,6 +1,6 @@
 <template>
   <li class="admin__list-item" @click="onClick">
-    {{ user }}
+    {{ item }}
   </li>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   name: "AdminListItem",
   props: {
-    user: {
+    item: {
       type: Object,
     },
     index: {

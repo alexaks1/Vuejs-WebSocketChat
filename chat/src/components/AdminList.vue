@@ -4,7 +4,7 @@
       @selectVariant="selectVariant"
       v-for="(item, index) in items"
       :key="index"
-      :user="item"
+      :item="item"
       :index="index"
     ></AdminListItem>
   </ul>
@@ -32,7 +32,7 @@ export default {
           this.selectedVariant = index;
           this.$emit("selectVariant",  this.selectedVariant);
       }
-  }
+  },
 };
 </script>
 

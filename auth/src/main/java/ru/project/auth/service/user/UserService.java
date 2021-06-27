@@ -1,6 +1,5 @@
 package ru.project.auth.service.user;
 
-import org.springframework.http.ResponseEntity;
 import ru.project.auth.controllers.userController.dto.CredentialsDTO;
 import ru.project.auth.controllers.userController.dto.UserRegisterDTO;
 import ru.project.auth.model.entity.User;
@@ -12,7 +11,5 @@ public interface UserService {
 
     User authenticate(CredentialsDTO credentialsDTO) throws UserDoesNotExistException, InvalidPasswordException;
 
-    ResponseEntity<?> isAuthorized(Long id);
-
-    ResponseEntity<?> isAdmin(Long id);
+    boolean isAdmin(User user);
 }
