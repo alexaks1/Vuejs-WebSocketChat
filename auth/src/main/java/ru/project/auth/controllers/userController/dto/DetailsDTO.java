@@ -8,8 +8,8 @@ import ru.project.auth.model.entity.Role;
 @Data
 public class DetailsDTO {
     private final Number id;
+    private final String login;
     private final String firstName;
     private final String lastName;
-//    private final String address;
     private final Role role;
 }
