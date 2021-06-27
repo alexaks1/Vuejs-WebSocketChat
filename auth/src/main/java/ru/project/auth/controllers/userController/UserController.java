@@ -41,8 +41,8 @@ public class UserController {
 
     @SneakyThrows
     @GetMapping("/users")
-    public ResponseEntity<?> getUsers(@RequestParam CredentialsDTO credentialsDTO) {
-        final User user = userService.authenticate(credentialsDTO);
+    public ResponseEntity<?> getUsers(@RequestParam String login, @RequestParam String password) {
+        final User user = userService.authenticate(new CredentialsDTO(login, password));
 
         if (!userService.isAdmin(user)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();

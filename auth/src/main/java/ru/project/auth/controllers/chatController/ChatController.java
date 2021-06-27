@@ -30,8 +30,8 @@ public class ChatController {
 
     @SneakyThrows
     @GetMapping("/")
-    public ResponseEntity<List<Chat>> getChats(@RequestParam CredentialsDTO credentialsDTO) {
-        final User user = userService.authenticate(credentialsDTO);
+    public ResponseEntity<List<Chat>> getChats(@RequestParam String login, @RequestParam String password) {
+        final User user = userService.authenticate(new CredentialsDTO(login, password));
 
         if (user.getUserDetails().getRole().equals(Role.ADMIN)) {
             return ResponseEntity.ok(chatRepository.findAll());
