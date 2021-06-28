@@ -5,7 +5,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,7 +23,9 @@ public class WebSocketController {
 
     @MessageMapping("/send")
     public void processMessage(@Payload ChatMessage chatMessage) {
+        log.info("Received: " + chatMessage);
         messageRepository.save(chatMessage);
+        log.info("Saved: " + chatMessage);
         messagingTemplate.convertAndSendToUser(
                 chatMessage.getChatId().toString(),
                 "/messages",
@@ -34,11 +35,5 @@ public class WebSocketController {
     @GetMapping("/messages/{chatId}")
     public ResponseEntity<?> getMessages(@PathVariable Long chatId) {
         return ResponseEntity.ok(messageRepository.findAllByChatId(chatId));
-    }
-
-    @MessageMapping("/chat.sendMessage")
-    @SendTo("/chat")
-    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
-        return chatMessage;
     }
 }
