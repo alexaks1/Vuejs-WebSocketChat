@@ -25,12 +25,12 @@ public class WebSocketController {
     public void processMessage(@Payload ChatMessage chatMessage) {
         log.info("Received: " + chatMessage);
         chatMessage.setId(null);
-        messageRepository.save(chatMessage);
-        log.info("Saved: " + chatMessage);
+        var saved = messageRepository.save(chatMessage);
+        log.info("Saved: " + saved);
         messagingTemplate.convertAndSendToUser(
-                chatMessage.getChatId().toString(),
+                saved.getChatId().toString(),
                 "/messages",
-                chatMessage);
+                saved);
     }
 
     @GetMapping("/messages/{chatId}")
