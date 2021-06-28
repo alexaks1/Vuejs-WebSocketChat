@@ -47,7 +47,7 @@ public class WebConfiguration extends OncePerRequestFilter {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("*").allowedOriginPatterns("*");
+                registry.addMapping("/**").allowedOrigins("http://localhost:8082").allowedOriginPatterns("*");
             }
         };
     }
