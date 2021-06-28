@@ -78,7 +78,7 @@
                 >Логин</label
               >
               <input
-              v-model="newUser.login"
+                v-model="newUser.login"
                 class="auth-input"
                 type="text"
                 id="login"
@@ -93,7 +93,7 @@
                 >Имя</label
               >
               <input
-              v-model="newUser.firstName"
+                v-model="newUser.firstName"
                 class="auth-input"
                 type="text"
                 id="name"
@@ -112,7 +112,7 @@
                 >Фамилия</label
               >
               <input
-              v-model="newUser.lastName"
+                v-model="newUser.lastName"
                 class="auth-input"
                 type="text"
                 id="surname"
@@ -131,7 +131,7 @@
                 >Пароль</label
               >
               <input
-              v-model="newUser.password"
+                v-model="newUser.password"
                 class="auth-input"
                 type="password"
                 id="password"
@@ -141,6 +141,10 @@
                 maxlength="30"
               />
             </div>
+            <span v-bind:class="{
+            'success-message': !newUser.status.isError,
+            'error-message': newUser.status.isError,
+          }">{{ newUser.status.message }}</span>
             <button class="submit-button auth__submit" type="submit">
               Зарегистрировать
             </button>
@@ -171,6 +175,10 @@
                 maxlength="30"
               />
             </div>
+            <span v-bind:class="{
+            'success-message': !newChat.status.isError,
+            'error-message': newChat.status.isError,
+          }">{{ newChat.status.message }}</span>
             <button class="submit-button auth__submit" type="submit">
               Создать
             </button>
@@ -192,7 +200,7 @@ export default {
   data() {
     return {
       role: null,
-      userId: null,
+      user: null,
       addUserModalIsOpened: false,
       addChatModalIsOpened: false,
       selectedChatId: null,
@@ -236,8 +244,10 @@ export default {
       axios
         .post(
           `http://localhost:8081/chats/${this.selectedChatId}/${this.selectedUserId}`,
-          null,
-          { params: { userId: this.userId } }
+          {
+            login: this.user.login,
+            password: this.user.password,
+          }
         )
         // .then((response) => {
         // console.log(response);
@@ -254,13 +264,13 @@ export default {
     },
     createChat() {
       axios
-        .post(
-          `http://localhost:8081/chats/`,
-          {
-            name: this.newChat.title,
+        .post(`http://localhost:8081/chats/`, {
+          credentialsDTO: {
+            login: this.user.login,
+            password: this.user.password,
           },
-          { params: { userId: this.userId } }
-        )
+          name: this.newChat.title,
+        })
         .then(() => {
           this.newChat.status.isSubmitted = true;
           this.newChat.status.isError = false;
@@ -275,11 +285,11 @@ export default {
     signUpUser() {
       axios
         .post(`http://localhost:8081/auth/sign-up`, {
-          "credentialsDTO": {
+          credentialsDTO: {
             login: this.newUser.login,
             password: this.newUser.password,
           },
-          "detailsDTO": {
+          detailsDTO: {
             id: "0",
             firstName: this.newUser.firstName,
             lastName: this.newUser.lastName,
@@ -287,23 +297,30 @@ export default {
           },
         })
         .then(() => {
-          this.newChat.status.isSubmitted = true;
-          this.newChat.status.isError = false;
-          this.newChat.status.message = "Успешно";
+          this.newUser.status.isSubmitted = true;
+          this.newUser.status.isError = false;
+          this.newUser.status.message = "Успешно";
         })
         .catch(() => {
-          this.newChat.status.isSubmitted = true;
-          this.newChat.status.isError = true;
-          this.newChat.status.message = "Ошибка";
+          this.newUser.status.isSubmitted = true;
+          this.newUser.status.isError = true;
+          this.newUser.status.message = "Ошибка";
         });
     },
   },
   computed: {},
   mounted() {
     // this.role = sessionStorage.role;
-    this.userId = sessionStorage.userId;
+    // this.userId = sessionStorage.userId;
+
+    this.user = JSON.parse(window.sessionStorage.user);
     axios
-      .get("http://localhost:8081/chats/", { params: { userId: this.userId } })
+      .get("http://localhost:8081/chats/", {
+        params: {
+          login: this.user.login,
+          password: this.user.password,
+        },
+      })
       .then((response) => {
         console.log(response);
         // if (response.data.length !== 0)
@@ -318,16 +335,19 @@ export default {
       });
     axios
       .get("http://localhost:8081/auth/users", {
-        params: { userId: this.userId },
+        params: {
+          login: this.user.login,
+          password: this.user.password,
+        },
       })
       .then((response) => {
         console.log(response);
         this.users = response.data.map((user) => {
           return {
-            id: user.detailsDTO.id,
-            firstName: user.detailsDTO.firstName,
-            lastName: user.detailsDTO.lastName,
-            role: user.detailsDTO.role,
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            role: user.role,
             // login: user.login,
             // password: user.password,
           };

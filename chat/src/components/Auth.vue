@@ -76,13 +76,17 @@ export default {
           password: this.password,
         })
         .then((response) => {
+          // console.log(response)
           this.status.code = response.status;
           if (this.status.code === 200) {
             this.$router.push({ name: "chats" });
           }
           // console.log(response);
           let sessionStorage = window.sessionStorage;
-          sessionStorage.setItem("user", JSON.stringify(response.data.detailsDTO));
+          sessionStorage.setItem("user", JSON.stringify({
+            ...response.data,
+            password: this.password,
+          }));
         })
         .catch((error) => {
           // console.log(error.response)
