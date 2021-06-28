@@ -2,6 +2,7 @@ package ru.project.auth.config;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
