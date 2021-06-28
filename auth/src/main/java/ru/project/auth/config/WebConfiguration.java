@@ -23,22 +23,22 @@ public class WebConfiguration extends OncePerRequestFilter {
     protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response,
                                     final FilterChain filterChain) throws ServletException, IOException, IOException {
 
-        String origin = request.getHeader("Origin");
-        response.setHeader("Access-Control-Allow-Origin", allowedOrigins.contains(origin) ? origin : "");
-        response.setHeader("Vary", "Origin");
-
-        // Access-Control-Max-Age
-        response.setHeader("Access-Control-Max-Age", "3600");
-
-        // Access-Control-Allow-Credentials
-        response.setHeader("Access-Control-Allow-Credentials", "true");
-
-        // Access-Control-Allow-Methods
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
-
-        // Access-Control-Allow-Headers
-        response.setHeader("Access-Control-Allow-Headers",
-                "Origin, X-Requested-With, Content-Type, Accept, " + "X-CSRF-TOKEN");
+//        String origin = request.getHeader("Origin");
+//        response.setHeader("Access-Control-Allow-Origin", allowedOrigins.contains(origin) ? origin : "");
+//        response.setHeader("Vary", "Origin");
+//
+//        // Access-Control-Max-Age
+//        response.setHeader("Access-Control-Max-Age", "3600");
+//
+//        // Access-Control-Allow-Credentials
+//        response.setHeader("Access-Control-Allow-Credentials", "true");
+//
+//        // Access-Control-Allow-Methods
+//        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+//
+//        // Access-Control-Allow-Headers
+//        response.setHeader("Access-Control-Allow-Headers",
+//                "Origin, X-Requested-With, Content-Type, Accept, " + "X-CSRF-TOKEN");
         filterChain.doFilter(request, response);
     }
 
