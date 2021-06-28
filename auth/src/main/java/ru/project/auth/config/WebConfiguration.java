@@ -8,27 +8,34 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
-//@Configuration
-//public class WebConfiguration implements WebMvcConfigurer {
-//
-//    @Override
-//    public void addCorsMappings(CorsRegistry registry) {
-//        registry.addMapping("/*").allowedOrigins("http://localhost:8080/");
-//    }
-//}
+
 @Component
 public class WebConfiguration extends OncePerRequestFilter {
+    private final List<String> allowedOrigins = Arrays.asList("http://localhost:8080", "http://localhost:8082");
 
     @Override
     protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response,
                                     final FilterChain filterChain) throws ServletException, IOException, IOException {
-        response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, PATCH, HEAD, OPTIONS");
-        response.addHeader("Access-Control-Allow-Headers", "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-        response.addHeader("Access-Control-Expose-Headers", "Access-Control-Allow-Origin, Access-Control-Allow-Credentials");
-        response.addHeader("Access-Control-Allow-Credentials", "true");
-        response.addIntHeader("Access-Control-Max-Age", 10);
+
+        String origin = request.getHeader("Origin");
+        response.setHeader("Access-Control-Allow-Origin", allowedOrigins.contains(origin) ? origin : "");
+        response.setHeader("Vary", "Origin");
+
+        // Access-Control-Max-Age
+        response.setHeader("Access-Control-Max-Age", "3600");
+
+        // Access-Control-Allow-Credentials
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+
+        // Access-Control-Allow-Methods
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+
+        // Access-Control-Allow-Headers
+        response.setHeader("Access-Control-Allow-Headers",
+                "Origin, X-Requested-With, Content-Type, Accept, " + "X-CSRF-TOKEN");
         filterChain.doFilter(request, response);
     }
 }
