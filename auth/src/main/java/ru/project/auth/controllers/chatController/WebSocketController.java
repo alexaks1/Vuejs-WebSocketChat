@@ -24,6 +24,7 @@ public class WebSocketController {
     @MessageMapping("/send")
     public void processMessage(@Payload ChatMessage chatMessage) {
         log.info("Received: " + chatMessage);
+        chatMessage.setId(null);
         messageRepository.save(chatMessage);
         log.info("Saved: " + chatMessage);
         messagingTemplate.convertAndSendToUser(

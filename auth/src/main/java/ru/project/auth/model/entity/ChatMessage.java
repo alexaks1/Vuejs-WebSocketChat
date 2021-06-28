@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,5 +19,4 @@ public class ChatMessage {
     private Long chatId;
     private String content;
     private String sender;
-    private LocalDateTime time;
 }
